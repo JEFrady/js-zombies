@@ -168,6 +168,26 @@ class Player {
       console.log('No food to eat');
     }
   }
+  useItem(item) {
+    if (item instanceof Food === true) {
+      this.eat(item);
+    }
+    else if (item instanceof Weapon === true) {
+      this.equip(item);
+    }
+    else {
+      console.log('Cannot use item');
+    }
+  }
+  equippedWith() {
+    if (this.equipped !== false) {
+    return this.equipped.name;
+    }
+    else {
+      return false;
+    }
+
+  }
 }
 
 /**
