@@ -112,7 +112,9 @@ class Player {
   }
   takeItem (Item) {
     if (this._pack.length < 3) {
-      return this._pack.push(Item);
+      this._pack.push(Item);
+      console.log(name + 'added ' + Item);
+      return true;
     }
     else {
       console.log('The pack is full so the item could not be stored.')
@@ -123,7 +125,7 @@ class Player {
     if (this._pack.indexOf(Item) > -1) {
       let index = this._pack.indexOf(Item);
       this._pack.splice(index, 1);
-      console.log(name + 'discarded ' + Item);
+      console.log(name + 'removed ' + Item);
       return  true;
     
     }
@@ -131,7 +133,25 @@ class Player {
       console.log('Nothing was discarded because the item could not be found')
       return false;
     }
-
+  }
+  checkPack() {
+    console.log(this._pack);
+  }
+  equip(itemToEquip) {
+    if (itemToEquip instanceof Weapon === true && this._pack.indexOf(itemToEquip) > -1) {
+      if (this.equipped !== false) {
+        this._pack.push(this.equipped);
+        this.equipped = itemToEquip;
+        this.discardItem(itemToEquip);
+      }
+      else {
+        this.equipped = itemToEquip;
+        this.discardItem(itemToEquip);
+      }
+    }
+    else {
+      console.log ('No weapons to equip');
+    }
   }
 }
 
@@ -146,7 +166,6 @@ class Player {
  *
  * @name checkPack
  */
-
 
 /**
  * Player Class Method => takeItem(item)
