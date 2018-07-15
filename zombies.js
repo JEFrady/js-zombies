@@ -153,6 +153,21 @@ class Player {
       console.log ('No weapons to equip');
     }
   }
+  eat(itemToEat) {
+    if (itemToEat instanceof Food === true && this._pack.indexOf(itemToEat) > -1) {
+      if (this.health + itemToEat.energy > 100) {
+        this.health = this.getMaxHealth();
+        this.discardItem(itemToEat);
+      }
+      else {
+        this.health = this.health + itemToEat.energy;
+        this.discardItem(itemToEat);
+      }
+    }
+    else {
+      console.log('No food to eat');
+    }
+  }
 }
 
 /**
