@@ -7,7 +7,11 @@
  * @param {string} name     The item's name.
  * @property {string} name
  */
-
+class Item {
+  constructor(name) {
+    this.name = name;
+  }
+}
 
 /**
  * Class => Weapon(name, damage)
@@ -24,6 +28,13 @@
  * @param {number} damage   The weapon's damage.
  * @property {number} damage
  */
+
+ class Weapon extends Item {
+   constructor(name, damage) {
+     super(name);
+     this.damage = damage;
+   }
+ }
 
 
 /**
@@ -48,8 +59,12 @@
  * @param {number} energy     The energy the food provides.
  * @property {number} energy
  */
-
-
+class Food extends Item {
+  constructor(name, energy) {
+    super(name);
+    this.energy = energy;
+  }
+}
 /**
  * Food Extends Item Class
  * -----------------------------
@@ -78,7 +93,47 @@
  * @property {method} getPack              Returns private variable `pack`.
  * @property {method} getMaxHealth         Returns private variable `maxHealth`.
  */
+class Player {
+  constructor(name, health, strength, speed){
+    this.name = name;
+    this.health = health;
+    this.strength = strength;
+    this.speed = speed;
+    this.isAlive = true;
+    this.equipped = false;
+    this._pack = [];
+    this._maxHealth = health;
+  }
+  getPack() {
+    return this._pack;
+  }
+  getMaxHealth() {
+    return this._maxHealth;
+  }
+  takeItem (Item) {
+    if (this._pack.length < 3) {
+      return this._pack.push(Item);
+    }
+    else {
+      console.log('The pack is full so the item could not be stored.')
+      return false;
+    }
+  }
+  discardItem(Item) {
+    if (this._pack.indexOf(Item) > -1) {
+      let index = this._pack.indexOf(Item);
+      this._pack.splice(index, 1);
+      console.log(name + 'discarded ' + Item);
+      return  true;
+    
+    }
+    else {
+      console.log('Nothing was discarded because the item could not be found')
+      return false;
+    }
 
+  }
+}
 
 /**
  * Player Class Method => checkPack()
